@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRUPAL 14</title>
+    <script>
+        window.onload = function () {
+        
+        //Better to construct options first and then pass it as a parameter
+        var options = {
+            animationEnabled: true,
+            title: {
+                text: "Precipitacion por ciudad",                
+                fontColor: "Peru"
+            },	
+            axisY: {
+                tickThickness: 0,
+                lineThickness: 0,
+                valueFormatString: " ",
+                gridThickness: 0                    
+            },
+            axisX: {
+                tickThickness: 0,
+                lineThickness: 0,
+                labelFontSize: 18,
+                labelFontColor: "Peru"				
+            },
+            data: [{
+                indexLabelFontSize: 18,
+                toolTipContent: "<span style=\"color:#62C9C3\">{indexLabel}:</span> <span style=\"color:#CD853F\"><strong>{y}</strong></span>",
+                indexLabelPlacement: "inside",
+                indexLabelFontColor: "white",
+                indexLabelFontWeight: 600,
+                indexLabelFontFamily: "Verdana",
+                color: "#62C9C3",
+                type: "bar",
+                dataPoints: [
+                    { y: 21, label: "Arica", indexLabel:"21%"},
+                    { y: 25, label: "Iquique", indexLabel:"25%"},
+                    { y: 33, label: "Calama", indexLabel:"33%"},
+                    { y: 36, label: "Antofagasta", indexLabel:"36%"},
+                    { y: 42, label: "Caldera", indexLabel:"42%"},
+                    { y: 49, label: "La Serena", indexLabel:"49%"},
+                    { y: 50, label: "Valparaiso", indexLabel:"50%"},
+                    { y: 55, label: "Rodelillo", indexLabel:"55%"},
+                    { y: 61, label: "Santiago", indexLabel:"61%" }
+                ]
+            }]
+        };
+        
+        $("#chartContainer").CanvasJSChart(options);
+
+        // 
+
+        var options2 = {
+        animationEnabled: true,
+        theme: "light2",
+        title:{
+            text: "Precipitaciones a la fecha versus normal a la fecha"
+        },
+        axisX:{
+            valueFormatString: "DD MMM"
+        },
+        axisY: {
+            title: "Precipitaciones",
+            suffix: "P",
+            minimum: 0,
+            maximum: 400
+        },
+        toolTip:{
+            shared:true
+        },  
+        legend:{
+            cursor:"pointer",
+            verticalAlign: "bottom",
+            horizontalAlign: "left",
+            dockInsidePlotArea: true,
+            itemclick: toogleDataSeries
+        },
+        data: [{
+            type: "line",
+            showInLegend: true,
+            name: "Precipitaciones a la fecha",
+            markerType: "square",
+            xValueFormatString: "DD MMM, YYYY",
+            color: "#F08080",
+            yValueFormatString: "#,##0K",
+            dataPoints: [
+                { label: "Santiago", y: 82.0 },
+                { label: "Rodelillo", y: 117.4 },
+                { label: "Valparaiso", y: 83.2 },
+                { label: "La Serena", y: 12.2 },
+                { label: "Caldera", y: 0.8 },
+                { label: "Antofagasta", y: 0.4 },
+                { label: "Calama", y: 18.6 },
+                { label: "Iquique", y: 4.4 },
+                { label: "Arica", y: 6.2 }
+            ]
+        },
+        {
+            type: "line",
+            showInLegend: true,
+            name: "Precipitaciones normales a la fecha",
+            lineDashType: "dash",
+            yValueFormatString: "#,##0K",
+            dataPoints: [
+                { label: "Santiago", y: 275.8 },
+                { label: "Rodelillo", y: 110 },
+                { label: "Valparaiso", y: 412.2 },
+                { label: "La Serena", y: 86.5 },
+                { label: "Caldera", y: 0.6 },
+                { label: "Antofagasta", y: 2.4 },
+                { label: "Calama", y: 5.9 },
+                { label: "Iquique", y: 0.9 },
+                { label: "Arica", y: 1.6 }
+            ]
+        }]
+    };
+    $("#chartContainer2").CanvasJSChart(options2);
+
+    function toogleDataSeries(e){
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else{
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+    // 
+
+    var options3 = {
+	title: {
+		text: "ESTACIONES DE MONITOREO PLUVIOMETRICO"
+	},
+	data: [{
+			type: "pie",
+			startAngle: 45,
+			showInLegend: "true",
+			legendText: "{label}",
+			indexLabel: "{label} ({y})",
+			yValueFormatString:"#,##0.#"%"",
+			dataPoints: [
+				{ label: "TARAPACA", y: 19 },
+				{ label: "ANTOFAGASTA", y: 63 },
+				{ label: "ATACAMA", y: 53 },
+				{ label: "COQUIMBO", y: 123 },
+				{ label: "OHIGGINS", y: 112 },
+				{ label: "MAULE", y: 125 },
+				{ label: "BIOBIO", y: 86 },
+                { label: "ARAUCANIA", y: 102 },
+                { label: "LAGOS", y: 74 },
+                { label: "AISEN", y: 45 },
+                { label: "MAGALLANES", y: 98 },
+                { label: "DE LOS RIOS", y: 44 },
+                { label: "ARICA", y: 53 },
+                { label: "NUBLE", y: 42 }
+			]
+	}]
+};
+$("#chartContainer3").CanvasJSChart(options3);
+
+    }
+ </script>
+        
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
